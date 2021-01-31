@@ -9,7 +9,7 @@
 <body>
 
 	<h1 class="name">Etch-a-Sketch</h1>
-		<div class="board">	
+		<div class="board twenty">	
 		</div>
 
 <script>
@@ -18,9 +18,17 @@ const board = document.querySelector('.board');
 
 for(let i = 0; i < 400; i++) {
 	let newElement = document.createElement('div')
-	board.appendChild(newElement)
+	board.appendChild(newElement);
+	newElement.classList.add('block')
 }
 
+const blocks = document.querySelectorAll('.block')
+
+blocks.forEach(item => {
+    item.addEventListener("mouseover", function() {
+        item.style.backgroundColor = "blue";
+    });
+});
 
 
 </script>
