@@ -1,0 +1,27 @@
+
+body {
+	font-size: 10px;
+	box-sizing: border-box;
+	font-family: arial, sans-serif;
+	margin-left: 25px;
+}
+
+h1 {
+	color: green;
+	font-size: 2rem;
+}
+
+
+.board {
+	display: grid;
+	width: 500px;
+	height: 500px;
+	border: 1rem solid red;
+	grid-template-columns: repeat(20, 1fr);
+	grid-template-rows: repeat(20, 1fr);
+}
+
+.board > div {
+  background-color: white;
+  border: 1px solid black;
+}
