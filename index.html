@@ -9,23 +9,36 @@
 <body>
 
 	<h1 class="name">Etch-a-Sketch</h1>
-		<div class="board twenty">	
-		</div>
+		<div class="container">
+			<div class="controls">
+			<button class="clear">Clear All</button>
+			<input type="range" id="pixelsize" name="pixelsize" min="10" max="70" value="15" class="slider">
+			<input type="color" id="colorpicker" name="colorpicker" value="#ffffff">
+			</div>
 
-	<div class="controls">
-		<button class="clear">Clear All</button>
-		<input type="range" id="pixelsize" name="pizelsize" min="4" max="100" value="15" class="slider">
-		<input type="color" id="color" name="colorpicker" value="blue">
-	</div>
+			<div class="board"></div>
+
+		
+		</div>
 
 <script>
 
 
-
+// Element Selectors
 const board = document.querySelector('.board');
-const clearbtn = document.querySelector('.clear')
-const slider = document.querySelector('#pizelsize')
+const clearbtn = document.querySelector('.clear');
+const colorpicker = document.querySelector('#colorpicker');
+const slider = document.querySelector('#pixelsize')
+let color = "blue"
 
+// Select Color
+function userColorSelection(event) {
+    color = this.value
+    console.log(color)
+}
+
+
+// Sets the grid and the elements inside it
 function createBlocks (times) {
 	for(let i = 0; i < times; i++) {
 	let newElement = document.createElement('div')
@@ -34,47 +47,51 @@ function createBlocks (times) {
 	}
 };
 
+
 function removeBlocks() {
 	while (board.firstChild) {
     board.firstChild.remove()
 	}
 }
 
-createBlocks(400)
 
-const blocks = document.querySelectorAll('.block')
+// Changes the color on mouseover
+function changeColor() {
+	let blocks = document.querySelectorAll('.block')
 
-function changeColor(color) {
 	blocks.forEach(item => {
     	item.addEventListener("mouseover", function() {
         item.style.backgroundColor = color;
     	});
 	});
 }
-changeColor("blue")
+
+
+createBlocks(400)
+changeColor()
+
+// Controls
+
+function createGrid() {   //pixel-size slider function
+	let value = this.value;
+	document.documentElement.style.setProperty('--pixelsize', value);
+	removeBlocks();
+	createBlocks((value * value));
+	changeColor();
+}
+
+
+slider.addEventListener('change', createGrid);
+
+
+colorpicker.addEventListener('change', userColorSelection)
+
 
 clearbtn.addEventListener('click' , function() {
 	blocks.forEach( item => {
 	item.style.backgroundColor = "white"
+	})
 })
-})
-
-inputs = document.querySelectorAll(".controls input")
-
-
-function handleUpdate() {
-	let value = this.value;
-	createBlocks(value);
-	document.documentElement.style.setProperty('--pixelsize', value);
-	removeBlocks();
-	createBlocks((value * value));
-	changeColor("blue");
-}
-
-inputs.forEach(input => {
-	input.addEventListener('change', handleUpdate);
-})
-
 
 
 
