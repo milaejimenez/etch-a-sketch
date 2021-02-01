@@ -1,4 +1,8 @@
 
+:root {
+	--pixelsize : 20;
+};
+
 body {
 	font-size: 10px;
 	box-sizing: border-box;
@@ -20,9 +24,10 @@ h1 {
 }
 
 .twenty {
-	grid-template-columns: repeat(20, 1fr);
-	grid-template-rows: repeat(20, 1fr);
+	grid-template-columns: repeat(var(--pixelsize), 1fr);
+	grid-template-rows: repeat(var(--pixelsize), 1fr);
 }
+
 
 .board > div {
   background-color: white;
